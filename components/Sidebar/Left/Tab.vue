@@ -1,13 +1,13 @@
 <template>
   <NuxtLink
     to="#"
-    class="flex items-center p-3 w-min hover:bg-gray-200 rounded-full"
+    class="flex items-center p-3 w-min hover:bg-gray-200 rounded-full dark:hover:bg-dim-200 dark:text-white"
     :class="defaultTransition"
   >
     <div class="h-6 w-6 text-dark">
       <slot name="icon" />
     </div>
-    <div class="ml-4 text-xl" :class="textClasses">
+    <div class="hidden ml-4 text-xl xl:block" :class="textClasses">
       <slot name="name"></slot>
     </div>
   </NuxtLink>
