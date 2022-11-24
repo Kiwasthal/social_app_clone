@@ -1,8 +1,8 @@
 <template>
-  <MainSection title="Home" :loading="loading">
-    This is our homepage</MainSection
-  >
+  <MainSection title="Home" :loading="loading"> {{ user }}</MainSection>
 </template>
 <script setup>
 const loading = ref(false);
+const { useAuthUser } = useAuth();
+const user = useAuthUser();
 </script>

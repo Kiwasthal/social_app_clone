@@ -1,4 +1,5 @@
 import useFetchApi from './useFetchApi';
+import jwtDecode from 'jwt-decode';
 
 export default () => {
   const useAuthToken = () => useState('auth_token');
@@ -18,6 +19,28 @@ export default () => {
   const setIsAuthLoading = value => {
     const authLoading = useAuthLoading();
     authLoading.value = value;
+  };
+
+  const register = ({ username, email, password, repeatPassword, name }) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log('registering');
+        await $fetch('/api/auth/register', {
+          method: 'POST',
+          body: {
+            username,
+            email,
+            password,
+            name,
+            repeatPassword,
+          },
+        });
+
+        resolve(true);
+      } catch (err) {
+        reject(err);
+      }
+    });
   };
 
   const login = ({ username, password }) => {
@@ -66,12 +89,28 @@ export default () => {
     });
   };
 
+  const reRefreshAccessToken = () => {
+    const authToken = useAuthToken();
+
+    if (!authToken.value) return;
+
+    const jwt = jwtDecode(authToken.value);
+    const newRefreshTime = jwt.exp - 60000;
+
+    setTimeout(async () => {
+      await refreshToken();
+      reRefreshAccessToken();
+    }, newRefreshTime);
+  };
+
   const initAuth = () => {
     return new Promise(async (resolve, reject) => {
       setIsAuthLoading(true);
       try {
         await refreshToken();
         await getUser();
+
+        reRefreshAccessToken();
         resolve(true);
       } catch (err) {
         reject(err);
@@ -80,5 +119,12 @@ export default () => {
       }
     });
   };
-  return { login, useAuthUser, useAuthToken, initAuth, useAuthLoading };
+  return {
+    login,
+    useAuthUser,
+    useAuthToken,
+    initAuth,
+    useAuthLoading,
+    register,
+  };
 };

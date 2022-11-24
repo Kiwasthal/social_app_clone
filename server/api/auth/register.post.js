@@ -3,10 +3,10 @@ import { createUser } from '~~/server/db/users';
 import { userTransformer } from '~~/server/transformers/user';
 
 export default defineEventHandler(async e => {
-  const body = await useBody(e);
+  const body = await readBody(e);
 
-  const { userName, email, password, repeatPassword, name } = body;
-  if (!userName || !email || !password || !repeatPassword || !name) {
+  const { username, email, password, repeatPassword, name } = body;
+  if (!username || !email || !password || !repeatPassword || !name) {
     return sendError(
       e,
       createError({ statusCode: 400, statusMessage: 'Invalid params' })
@@ -20,7 +20,7 @@ export default defineEventHandler(async e => {
   }
 
   const userData = {
-    userName,
+    username,
     email,
     password,
     name,
