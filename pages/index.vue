@@ -1,5 +1,7 @@
 <template>
-  <MainSection title="Home" :loading="loading"> {{ user }}</MainSection>
+  <MainSection title="Home" :loading="loading">
+    <TweetForm />
+  </MainSection>
 </template>
 <script setup>
 const loading = ref(false);
