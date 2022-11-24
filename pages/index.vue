@@ -1,6 +1,6 @@
 <template>
   <MainSection title="Home" :loading="loading">
-    <TweetForm />
+    <TweetForm :user="user" />
   </MainSection>
 </template>
 <script setup>

@@ -27,7 +27,7 @@ export default defineEventHandler(async e => {
     const cloudinaryResource = await uploadToCloudinary(file.filepath);
     return createMediaFile({
       url: cloudinaryResource.secure_url,
-      provierPublicId: cloudinaryResource.public_id,
+      providerPublicId: cloudinaryResource.public_id,
       userId,
       tweetId: tweet.id,
     });
