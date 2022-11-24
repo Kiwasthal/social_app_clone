@@ -111,7 +111,7 @@
         </div>
       </div>
       <div class="ml-auto">
-        <UIButton size="sm">
+        <UIButton size="sm" :disabled="isDisabled" @onClick="handleFormSubmit">
           <strong> Tweet </strong>
         </UIButton>
       </div>
@@ -125,8 +125,10 @@ const { twitterBorderColor } = useTailwindConfig();
 const imageInput = ref();
 const selectedFile = ref(null);
 const inputImageUrl = ref(null);
-const emits = defineEmits(['onSubmit']);
 const text = ref('');
+const emits = defineEmits(['onSubmit']);
+
+const isDisabled = computed(() => text.value === '');
 
 const props = defineProps({
   user: {
