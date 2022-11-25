@@ -3,9 +3,10 @@ export default () => {
     const form = new FormData();
 
     form.append('text', formData.text);
+    form.append('replyTo', formData.replyTo);
 
-    formData.mediaFiles.forEach((mediaFIle, index) => {
-      form.append('media_file' + index, mediaFIle);
+    formData.mediaFiles.forEach((mediaFile, index) => {
+      form.append('media_file' + index, mediaFile);
     });
 
     return useFetchApi('/api/user/tweets', {
@@ -28,8 +29,20 @@ export default () => {
     });
   };
 
+  const getTweetById = tweetId => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await useFetchApi(`/api/tweets/${tweetId}`);
+        resolve(response);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  };
+
   return {
     postTweet,
     getHomeTweets,
+    getTweetById,
   };
 };

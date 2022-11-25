@@ -4,7 +4,7 @@
       <Title>Home / Twitter</Title>
     </Head>
     <div class="border-b" :class="twitterBorderColor">
-      <TweetForm :user="user" />
+      <TweetForm :user="user" @on-success="handleFormSuccess" />
     </div>
 
     <TweetListFeed :tweets="homeTweets" />
