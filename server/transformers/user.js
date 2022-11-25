@@ -11,5 +11,6 @@ export const userTransformer = user => {
     email: user.email,
     username: user.username,
     profileImage: user.profileImage,
+    handle: '@' + user.username,
   };
 };

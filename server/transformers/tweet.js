@@ -12,7 +12,7 @@ export const tweetTransformer = tweet => {
     author: !!tweet.author ? userTransformer(tweet.author) : null,
     replies: !!tweet.replies ? tweet.replies.map(tweetTransformer) : [],
     replyTo: !!tweet.replyTo ? tweetTransformer(tweet.replyTo) : null,
-    repliesCount: !!tweet.replies ? tweet.replies.lenght : 0,
+    repliesCount: !!tweet.replies ? tweet.replies.length : 0,
     postedAtHuman: human(tweet.createdAt),
   };
 };

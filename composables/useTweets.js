@@ -14,7 +14,22 @@ export default () => {
     });
   };
 
+  const getHomeTweets = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await useFetchApi('/api/tweets', {
+          method: 'GET',
+        });
+
+        resolve(response);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  };
+
   return {
     postTweet,
+    getHomeTweets,
   };
 };

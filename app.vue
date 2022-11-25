@@ -1,6 +1,6 @@
 <template>
   <div :class="{ dark: darkMode }">
-    <div class="bg-white dark:bg-dim-900 h-screen">
+    <div class="bg-white dark:bg-dim-900 h-full">
       <LoadingPage v-if="isLoading" />
       <!-- App -->
       <div v-else-if="user" class="min-h-full">
@@ -9,8 +9,9 @@
         >
           <!-- Left sidebar -->
           <div class="hidden md:block xs-col-span-1 xl:col-span-2">
-            <div class="sticky top-0"></div>
-            <SidebarLeft />
+            <div class="sticky top-0">
+              <SidebarLeft />
+            </div>
           </div>
           <!-- Main content -->
           <main class="col-span-12 md:col-span-8 xl:col-span-6">
